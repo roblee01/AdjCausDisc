@@ -8,6 +8,7 @@
 
 
 CoefMat_Create = function(Y, A){
+  # given in the Yi = ∑ on (where the index j of Yj corresponding to parent nodes of Yi) of (bij)*(Yj) + ei. The coeffecient matrix will have all the possible bij results that is calculated using spike and slab prior.
 
   if(length(Y) != nrow(A)){
     stop('The Adjacency matrix should have rows that are equal to number of data in Y')
