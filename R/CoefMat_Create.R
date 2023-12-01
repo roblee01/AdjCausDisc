@@ -1,8 +1,9 @@
-#'
+#' CoefMat_create
 #'
 #' @param Y The data the causal discovery adjacency matrix wants to show the connections with.
 #' @param A The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix where the possible matrix entry can only be 0
 #' @returns A matrix that contains all the coefficients corresponding to specific relationships between each entry of the Y data
+#'
 #' @examples
 #' CoefMat_Create(Y_vector,A_matrix)
 

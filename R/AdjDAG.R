@@ -1,4 +1,4 @@
-#'
+#' AdjDAG
 #'
 #' @param A The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix where the possible matrix entry can only be 0
 #' @return The plot of the Directed Acyclic Graph that is described within the adjacency matrix
@@ -17,6 +17,10 @@ AdjDAG <- function(A){
     DAG_Strings = append(DAG_Strings,c(as.formula(paste(names[i],paste(names[A[i,]==1],collapse="+"),sep="~"))))
   }
 
+  pdf("DAG_result.pdf")
 
-  ggdag(do.call(dagify, DAG_Strings))
+
+  return(ggdag(do.call(dagify, DAG_Strings)))
+
+  dev.off()
 }
