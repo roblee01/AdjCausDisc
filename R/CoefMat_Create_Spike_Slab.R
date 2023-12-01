@@ -1,14 +1,14 @@
-#' CoefMat_create
+#' CoefMat_Create_Spike_Slab
 #'
 #' @param Y The data the causal discovery adjacency matrix wants to show the connections with.
 #' @param A The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix where the possible matrix entry can only be 0
 #' @returns A matrix that contains all the coefficients corresponding to specific relationships between each entry of the Y data
 #'
 #' @examples
-#' CoefMat_Create(Y_vector,A_matrix)
+#' CoefMat_Create_Spike_Slab(Y_vector,A_matrix)
 
 
-CoefMat_Create = function(Y, A){
+CoefMat_Create_Spike_Slab = function(Y, A){
   # given in the Yi = ∑ on (where the index j of Yj corresponding to parent nodes of Yi) of (bij)*(Yj) + ei. The coeffecient matrix will have all the possible bij results that is calculated using spike and slab prior.
 
   if(length(Y) != nrow(A)){

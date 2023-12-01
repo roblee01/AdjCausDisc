@@ -1,5 +1,5 @@
 ---
-title: "Adjacency Matrix Causal Discovery Coefficient Matrix Creator and Visualizer"
+title: "AdjCausDisc"
 author: Robert Lee
 date: 11 30, 2023
 output:
@@ -11,6 +11,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-We will start by importing our function from github
+AdjCausDisc is a package uses inputed data and a specific Adjacency matrix that provides the structure of a Directed Acyclic graph to provide a variety of results. The Adjacency matrix will be a matrix of entries of 1s and 0s that describes 
+$$
+\begin{bmatrix} 
+	a & b & c \\
+	c & d & d\\
+	e & f & g \\
+	\end{bmatrix}
+$$
+
 
 
