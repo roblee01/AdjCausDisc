@@ -2,7 +2,7 @@
 #'
 #' @param Y The data the causal discovery adjacency matrix wants to show the connections with.
 #' @param A The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix where the possible matrix entry can only be 0
-#' @returns A matrix that contains all the coefficients corresponding to specific relationships between each entry of the Y data
+#' @returns A matrix that contains all the coefficients corresponding to specific relationships between each entry of the Y data using Stochastic Search Variable Search to get the values of the coeffecients.
 #'
 #' @examples
 #' CoefMat_Create_SSVS(Y_vector,A_matrix)
@@ -20,11 +20,7 @@ CoefMat_Create_SSVS = function(Y, A){
   }
 
 
-  A_edit = matrix(nrow=length(Y),ncol=length(Y),0)
-
-  for(i in 1:length(Y)){
-    A_edit[,i]=A[,i]*Y[i]
-  }
+  A_edit = t(t(A)*Y)
 
   unwinded_adj_mat <- c(t(A_edit))
 
@@ -54,10 +50,10 @@ CoefMat_Create_SSVS = function(Y, A){
   corresponding_Y_names = colnames(X)
   results_ssvs = setNames(summary(ssvs(big_dat,colnames(big_dat)[1],colnames(big_dat)[2:length(colnames(big_dat))]))$`Avg Beta`,corresponding_Y_names)
 
-  indices = as.numeric(strsplit(corresponding_Y_names,""))
+  indices = strsplit(corresponding_Y_names,"")
   coefficient_matrix = matrix(0, nrow = nrow(A), ncol = ncol(A))
   for(i in 1:length(indices)){
-    indices_2 = indices[[i]]
+    indices_2 = as.numeric(indices[[i]])
     coefficient_matrix[indices_2[1],indices_2[2]] = results_ssvs[i]
   }
 

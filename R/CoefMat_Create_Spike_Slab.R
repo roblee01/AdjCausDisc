@@ -20,13 +20,10 @@ CoefMat_Create_Spike_Slab = function(Y, A){
   }
 
 
-  A_edit = matrix(nrow=length(Y),ncol=length(Y),0)
-
-  for(i in 1:length(Y)){
-    A_edit[,i]=A[,i]*Y[i]
-  }
+  A_edit = t(t(A)*Y)
 
   unwinded_adj_mat <- c(t(A_edit))
+
 
   design_matrix <- matrix(0, nrow = length(Y), ncol = length(unwinded_adj_mat))
 
