@@ -6,6 +6,7 @@
 #'
 #' @examples
 #' CoefMat_Create_Spike_Slab(Y_vector,A_matrix)
+#' @export
 
 
 CoefMat_Create_Spike_Slab = function(Y, A){
@@ -38,8 +39,8 @@ CoefMat_Create_Spike_Slab = function(Y, A){
     index_A = index_A+ncol(A)
   }
 
-  coeffecient_matrix = matrix(spikeslab(Y~design_matrix)$bma,nrow=nrow(A),ncol=ncol(A),byrow=TRUE)
-  coeffecient_matrix[abs(coeffecient_matrix)<10^-6]=0
+  coefficient_matrix = matrix(spikeslab(Y~design_matrix)$bma,nrow=nrow(A),ncol=ncol(A),byrow=TRUE)
+  coefficient_matrix[abs(coefficient_matrix)<10^-6]=0
 
-  return(coeffecient_matrix)
+  return(coefficient_matrix)
 }

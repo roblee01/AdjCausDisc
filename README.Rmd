@@ -11,7 +11,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-AdjCausDisc is a package uses inputed data and a specific Adjacency matrix that provides the structure of a Directed Acyclic graph to provide a variety of results. The Adjacency matrix will be a matrix of entries of 1s and 0s that describes 
+AdjCausDisc is a package uses inputed data and a specific Adjacency matrix that provides the structure of a Directed Acyclic graph to provide a value of the coefficients using either the spike and slab prior or the SSVS bayesian variable selection technique. 
+
+The Adjacency matrix will be a matrix of entries of 1s and 0s that is lower diagonals that shows the connections between the Y variables, the p
+
+
 $$
 \begin{bmatrix} 
 	a & b & c \\

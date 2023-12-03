@@ -9,4 +9,5 @@ Description:
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Imports: spikeslab, ggdag, dagitty
+Imports: spikeslab, ggdag, dagitty, SSVS, stats, grDevices
+

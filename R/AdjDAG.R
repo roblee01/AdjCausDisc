@@ -4,6 +4,7 @@
 #' @return The plot of the Directed Acyclic Graph that is described within the adjacency matrix
 #' @examples
 #' AdjDAG(A_matrix)
+#' @export
 
 
 AdjDAG <- function(A){

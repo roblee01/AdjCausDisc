@@ -1,5 +1,7 @@
 #' @importFrom spikeslab spikeslab
-#' @importFrom dagitty dagify
+#' @importFrom ggdag dagify
 #' @importFrom ggdag ggdag
 #' @importFrom SSVS ssvs
+#' @importFrom stats as.formula
+#' @importFrom grDevices pdf
 NULL

@@ -6,6 +6,7 @@
 #'
 #' @examples
 #' CoefMat_Create_SSVS(Y_vector,A_matrix)
+#' @export
 
 
 CoefMat_Create_SSVS = function(Y, A){
@@ -57,5 +58,5 @@ CoefMat_Create_SSVS = function(Y, A){
     coefficient_matrix[indices_2[1],indices_2[2]] = results_ssvs[i]
   }
 
-  return(coeffecient_matrix)
+  return(coefficient_matrix)
 }
