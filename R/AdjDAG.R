@@ -3,7 +3,11 @@
 #' @param A The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix where the possible matrix entry can only be 0
 #' @return The plot of the Directed Acyclic Graph that is described within the adjacency matrix
 #' @examples
-#'
+#' Adjacency_matrix = matrix(nrow=3,ncol=3,0)
+#' Adjacency_matrix[,1]=c(0,1,1)
+#' Adjacency_matrix[,2]=c(0,0,1)
+#' Adjacency_matrix[,3]=c(0,0,0)
+#' AdjDAG(Adjacency_matrix)
 #' @export
 
 
