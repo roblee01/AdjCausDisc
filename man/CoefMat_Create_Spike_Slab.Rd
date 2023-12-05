@@ -9,13 +9,13 @@ CoefMat_Create_Spike_Slab(Y, A)
 \arguments{
 \item{Y}{The data the causal discovery adjacency matrix wants to show the connections with.}
 
-\item{A}{The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix where the possible matrix entry can only be 0}
+\item{A}{The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix in order for it to be acyclic. The number of rows and number of columns of A should be same as the number of data points in Y.}
 }
 \value{
-A matrix that contains all the coefficients corresponding to specific relationships between each entry of the Y data
+A matrix that contains all the coefficients corresponding to specific edge between each entry of the Y data
 }
 \description{
-Uses spike and slab prior to get the corresponding coefficient matrix Bij corresponding to \eqn{Y = B_{ij}X_{i}} + e_{i}. The coefficients represents the connections from the jth entry of Y to the ith entry of Y.
+Uses spike and slab prior to get the corresponding coefficient matrix Bij corresponding to \eqn{Y_{i} = B_{ij}X_{i} + e_{i}}. The coefficients represents the connections from the jth entry of Y to the ith entry of Y.
 }
 \examples{
 Adjacency_matrix = matrix(nrow=3,ncol=3,0)

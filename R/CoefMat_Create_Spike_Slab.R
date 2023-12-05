@@ -1,9 +1,9 @@
 #' CoefMat_Create_Spike_Slab
 #' @description
-#' Uses spike and slab prior to get the corresponding coefficient matrix Bij corresponding to \eqn{Y = B_{ij}X_{i}} + e_{i}. The coefficients represents the connections from the jth entry of Y to the ith entry of Y.
+#' Uses spike and slab prior to get the corresponding coefficient matrix Bij corresponding to \eqn{Y_{i} = B_{ij}X_{i} + e_{i}}. The coefficients represents the connections from the jth entry of Y to the ith entry of Y.
 #' @param Y The data the causal discovery adjacency matrix wants to show the connections with.
-#' @param A The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix where the possible matrix entry can only be 0
-#' @returns A matrix that contains all the coefficients corresponding to specific relationships between each entry of the Y data
+#' @param A The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix in order for it to be acyclic. The number of rows and number of columns of A should be same as the number of data points in Y.
+#' @returns A matrix that contains all the coefficients corresponding to specific edge between each entry of the Y data
 #' @export
 #' @examples
 #' Adjacency_matrix = matrix(nrow=3,ncol=3,0)

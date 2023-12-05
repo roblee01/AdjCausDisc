@@ -1,3 +1,5 @@
+# AdjCausDisc
+
 AdjCausDisc is a package that uses inputed Y data and a specific
 Adjacency matrix, that provides the structure of a Directed Acyclic
 graph, to provide the value of the coefficients for each of the connects
@@ -81,19 +83,19 @@ SSVS_results = CoefMat_Create_SSVS(Y, Adjacency_matrix)
 Spike_Slab_results
 ```
 
-    ##             [,1]         [,2] [,3]
-    ## [1,]  0.00000000  0.000000000    0
-    ## [2,]  0.25122396  0.000000000    0
-    ## [3,] -0.01362809 -0.008102382    0
+    ##             [,1]       [,2] [,3]
+    ## [1,]  0.00000000 0.00000000    0
+    ## [2,] -0.06170224 0.00000000    0
+    ## [3,]  0.03045125 0.04367046    0
 
 ``` r
 SSVS_results
 ```
 
-    ##        [,1]   [,2] [,3]
-    ## [1,] 0.0000 0.0000    0
-    ## [2,] 0.9657 0.0000    0
-    ## [3,] 0.0144 0.0038    0
+    ##         [,1]   [,2] [,3]
+    ## [1,]  0.0000 0.0000    0
+    ## [2,] -0.1420 0.0000    0
+    ## [3,]  0.0746 0.0609    0
 
 ``` r
 AdjDAG(Adjacency_matrix)

@@ -10,7 +10,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+# AdjCausDisc
 AdjCausDisc is a package that uses inputed Y data and a specific Adjacency matrix, that provides the structure of a Directed Acyclic graph, to provide the value of the coefficients for each of the connects between the different entries of Y using either the spike and slab prior or the SSVS bayesian variable selection technique. 
 
 The Adjacency matrix will be a matrix of entries of 1s and 0s that is lower diagonals that shows the connections between the input Y variables. Where the entry ij in the matrix represents the connection between $Y_{j}$ to $Y_{i}$, which will be 1 if there is a connection or 0 if there is no connection. Since AdjCausDisc will focus on DAGs where there is no cyclic relationship between the Y data entries, so the matrix will have to be lower diagonal.
