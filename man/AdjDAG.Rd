@@ -13,7 +13,7 @@ AdjDAG(A)
 The plot of the Directed Acyclic Graph that is described within the adjacency matrix
 }
 \description{
-AdjDAG
+Uses the information in the Adjacency Matrix, which informs us of where the directed edges are presents, to create the Directed Acyclic Graph visualization
 }
 \examples{
 Adjacency_matrix = matrix(nrow=3,ncol=3,0)

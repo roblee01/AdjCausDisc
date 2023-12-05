@@ -1,5 +1,6 @@
 #' AdjDAG
-#'
+#' @description
+#' Uses the information in the Adjacency Matrix, which informs us of where the directed edges are presents, to create the Directed Acyclic Graph visualization
 #' @param A The adjacency matrix that shows us the structure of the DAG. The input should be a lower triangular matrix where the possible matrix entry can only be 0
 #' @return The plot of the Directed Acyclic Graph that is described within the adjacency matrix
 #' @examples

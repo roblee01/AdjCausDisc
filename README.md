@@ -38,22 +38,22 @@ the DAG cyclic. Therefore, we make sure that the Adjacency matrix is
 lower triangular.
 
 As mentioned, though the goal of some of the packages is to find the
-corresponding the coeffecients corresponding to the edges that are
+corresponding the coefficients corresponding to the edges that are
 connected in the DAG, which can be solved in the matrix
-*B*<sub>*i**j*</sub> in the model
+*B*<sub>*ij*</sub> in the model
 
-*Y*<sub>*i*</sub> = ∑<sub>*j* ∈ *p**a*(*j*)</sub>*B*<sub>*i**j*</sub>*Y*<sub>*j*</sub> + *ϵ*<sub>*i*</sub>
+*Y*<sub>*i*</sub> = ∑<sub>*j* ∈ *pa*(*j*)</sub>*B*<sub>*ij*</sub>*Y*<sub>*j*</sub> + *ϵ*<sub>*i*</sub>
 
 where pa(j) represents the parent nodes of *Y*<sub>*j*</sub>. In order
 to get the corresponding matrix with all the *B*<sub>*i**j*</sub>’s is
 to use either the
 
 \*CoefMat_Create_Spike_Slab: Assigns the spike and slab prior to
-*B*<sub>*i**j*</sub> and performs sampling to get the values of the
+*B*<sub>*ij*</sub> and performs sampling to get the values of the
 individuals coefficients.
 
 \*CoefMat_Create_SSVS: Using stochastic search variable selection to get
-the *B*<sub>*i**j*</sub>s and performs sampling to get the values of the
+the *B*<sub>*ij*</sub>s and performs sampling to get the values of the
 individuals coefficients.
 
 \*AdjDAG: Uses the structure provided in the adjacency matrix, to create
