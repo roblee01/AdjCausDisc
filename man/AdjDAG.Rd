@@ -16,5 +16,9 @@ The plot of the Directed Acyclic Graph that is described within the adjacency ma
 AdjDAG
 }
 \examples{
-AdjDAG(A_matrix)
+Adjacency_matrix = matrix(nrow=3,ncol=3,0)
+Adjacency_matrix[,1]=c(0,1,1)
+Adjacency_matrix[,2]=c(0,0,1)
+Adjacency_matrix[,3]=c(0,0,0)
+AdjDAG(Adjacency_matrix)
 }

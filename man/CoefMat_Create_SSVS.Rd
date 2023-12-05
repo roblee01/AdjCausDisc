@@ -18,7 +18,10 @@ A matrix that contains all the coefficients corresponding to specific relationsh
 Uses ssvs bayesian model selection to get the corresponding coefficient matrix Bij corresponding to \eqn{Y = B_{ij}X_{i} + e_{i}}. The coefficients represents the connections from the jth entry of Y to the ith entry of Y.
 }
 \examples{
-CoefMat_Create_SSVS(Y_vector,A_matrix)
-
-
+Adjacency_matrix = matrix(nrow=3,ncol=3,0)
+Adjacency_matrix[,1]=c(0,1,1)
+Adjacency_matrix[,2]=c(0,0,1)
+Adjacency_matrix[,3]=c(0,0,0)
+Y_vector = rnorm(3)
+CoefMat_Create_SSVS(Y_vector,Adjacency_matrix)
 }

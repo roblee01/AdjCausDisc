@@ -6,7 +6,7 @@ Author: Robert Lee
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description:
   Using an input of Adjacency matrix that is a lower triangular matrix that describes the structure of a DAG, the first function will find the corresponding coefficient matrix based on the Causal Discovery model that find all possible coefficients using spike and slab prior. Then using the DAG structure of the adjacency matrix, the second function will create a visualization of the DAG.
-License: What license is it under?
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
