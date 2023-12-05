@@ -9,8 +9,8 @@ or the SSVS bayesian variable selection technique.
 The Adjacency matrix will be a matrix of entries of 1s and 0s that is
 lower diagonals that shows the connections between the input Y
 variables. Where the entry ij in the matrix represents the connection
-between *Y*<sub>*j*</sub> to *Y*<sub>*i*</sub>, which will be 1 if there
-is a connection or 0 if there is no connection. Since AdjCausDisc will
+from *Y*<sub>*j*</sub> to *Y*<sub>*i*</sub>, which will be 1 if there is
+a connection or 0 if there is no connection. Since AdjCausDisc will
 focus on DAGs where there is no cyclic relationship between the Y data
 entries, so the matrix will have to be lower diagonal.
 
@@ -30,6 +30,12 @@ As mentioned above each entry ij represents connection between
 there relationship from *Y*<sub>1</sub> to *Y*<sub>2</sub>,
 *Y*<sub>1</sub> to *Y*<sub>3</sub>, and *Y*<sub>2</sub> to
 *Y*<sub>3</sub>.
+
+If there is a 1 at entry at row 1 column 2, then there has to be a
+connection between *Y*<sub>2</sub> to *Y*<sub>1</sub>, but we have a
+connection between *Y*<sub>1</sub> to *Y*<sub>2</sub>, which would make
+the DAG cyclic. Therefore, we make sure that the Adjacency matrix is
+lower triangular.
 
 As mentioned, though the goal of some of the packages is to find the
 corresponding the coeffecients corresponding to the edges that are
@@ -77,25 +83,23 @@ Spike_Slab_results = CoefMat_Create_Spike_Slab(Y,Adjacency_matrix)
 SSVS_results = CoefMat_Create_SSVS(Y, Adjacency_matrix)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-1-1.png)![](README_files/figure-markdown_github/unnamed-chunk-1-2.png)![](README_files/figure-markdown_github/unnamed-chunk-1-3.png)![](README_files/figure-markdown_github/unnamed-chunk-1-4.png)![](README_files/figure-markdown_github/unnamed-chunk-1-5.png)![](README_files/figure-markdown_github/unnamed-chunk-1-6.png)![](README_files/figure-markdown_github/unnamed-chunk-1-7.png)![](README_files/figure-markdown_github/unnamed-chunk-1-8.png)![](README_files/figure-markdown_github/unnamed-chunk-1-9.png)![](README_files/figure-markdown_github/unnamed-chunk-1-10.png)![](README_files/figure-markdown_github/unnamed-chunk-1-11.png)![](README_files/figure-markdown_github/unnamed-chunk-1-12.png)![](README_files/figure-markdown_github/unnamed-chunk-1-13.png)![](README_files/figure-markdown_github/unnamed-chunk-1-14.png)![](README_files/figure-markdown_github/unnamed-chunk-1-15.png)![](README_files/figure-markdown_github/unnamed-chunk-1-16.png)![](README_files/figure-markdown_github/unnamed-chunk-1-17.png)![](README_files/figure-markdown_github/unnamed-chunk-1-18.png)![](README_files/figure-markdown_github/unnamed-chunk-1-19.png)![](README_files/figure-markdown_github/unnamed-chunk-1-20.png)
-
 ``` r
 Spike_Slab_results
 ```
 
-    ##             [,1]       [,2] [,3]
-    ## [1,]  0.00000000 0.00000000    0
-    ## [2,] -0.06170224 0.00000000    0
-    ## [3,]  0.03045125 0.04367046    0
+    ##             [,1]        [,2] [,3]
+    ## [1,]  0.00000000  0.00000000    0
+    ## [2,]  0.06291464  0.00000000    0
+    ## [3,] -0.09707375 -0.07412243    0
 
 ``` r
 SSVS_results
 ```
 
-    ##         [,1]   [,2] [,3]
-    ## [1,]  0.0000 0.0000    0
-    ## [2,] -0.1420 0.0000    0
-    ## [3,]  0.0746 0.0609    0
+    ##         [,1]    [,2] [,3]
+    ## [1,]  0.0000  0.0000    0
+    ## [2,]  0.2655  0.0000    0
+    ## [3,] -0.1916 -0.1942    0
 
 ``` r
 AdjDAG(Adjacency_matrix)

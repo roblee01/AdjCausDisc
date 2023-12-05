@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # AdjCausDisc
 AdjCausDisc is a package that uses inputed Y data and a specific Adjacency matrix, that provides the structure of a Directed Acyclic graph, to provide the value of the coefficients for each of the connects between the different entries of Y using either the spike and slab prior or the SSVS bayesian variable selection technique. 
 
-The Adjacency matrix will be a matrix of entries of 1s and 0s that is lower diagonals that shows the connections between the input Y variables. Where the entry ij in the matrix represents the connection between $Y_{j}$ to $Y_{i}$, which will be 1 if there is a connection or 0 if there is no connection. Since AdjCausDisc will focus on DAGs where there is no cyclic relationship between the Y data entries, so the matrix will have to be lower diagonal.
+The Adjacency matrix will be a matrix of entries of 1s and 0s that is lower diagonals that shows the connections between the input Y variables. Where the entry ij in the matrix represents the connection from $Y_{j}$ to $Y_{i}$, which will be 1 if there is a connection or 0 if there is no connection. Since AdjCausDisc will focus on DAGs where there is no cyclic relationship between the Y data entries, so the matrix will have to be lower diagonal.
 
 As an example, consider we have data Y = (Y1, Y2, Y3) and the Adjacency matrix below:
 
@@ -27,9 +27,11 @@ $$
 
 As mentioned above each entry ij represents connection between $Y_{j}$ to $Y_{i}$, so the adjacency matrix shows there relationship from $Y_{1}$ to $Y_{2}$, $Y_{1}$ to $Y_{3}$, and $Y_{2}$ to $Y_{3}$. 
 
+If there is a 1 at entry at row 1 column 2, then there has to be a connection between $Y_{2}$ to $Y_{1}$, but we have a connection between $Y_{1}$ to $Y_{2}$, which would make the DAG cyclic. Therefore, we make sure that the Adjacency matrix is lower triangular.
+
 As mentioned, though the goal of some of the packages is to find the corresponding the coeffecients corresponding to the edges that are connected in the DAG, which can be solved in the matrix $B_{ij}$ in the model
 
-$Y_{i} = \sum_{j\in pa(j)}B_{ij}Y_{j}+\epsilon_{i}$
+$$Y_{i} = \sum_{j\in pa(j)}B_{ij}Y_{j}+\epsilon_{i}$$
 
 where pa(j) represents the parent nodes of $Y_{j}$.
 In order to get the corresponding matrix with all the $B_{ij}$'s is to use either the 
@@ -41,7 +43,7 @@ In order to get the corresponding matrix with all the $B_{ij}$'s is to use eithe
 *AdjDAG: Uses the structure provided in the adjacency matrix, to create the visualization of the Directed Acyclic Graph.
 
 
-```{r,results='hide'}
+```{r,fig.keep='none'}
 library(AdjCausDisc)
 Y<-rnorm(3)
 
