@@ -6,6 +6,11 @@
 #' @returns A matrix that contains all the coefficients corresponding to specific relationships between each entry of the Y data using Stochastic Search Variable Search to get the values of the coeffecients.
 #'
 #' @examples
+#' Adjacency_matrix = matrix(nrow=3,ncol=3,0)
+#' Adjacency_matrix[,1]=c(0,1,1)
+#' Adjacency_matrix[,2]=c(0,0,1)
+#' Adjacency_matrix[,3]=c(0,0,0)
+#' Y_vector = rnorm(3)
 #' CoefMat_Create_SSVS(Y_vector,A_matrix)
 #'
 #'
