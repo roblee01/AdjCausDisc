@@ -18,24 +18,125 @@ knitr::opts_chunk$set(
 library(AdjCausDisc)
 ```
 
-# AdjCausDisc
 
 The main goal of AdjCausDisc is to use the input of an Adjacency Matrix that represents the structure of the Directed Acyclic Graph (DAG) and the dataset Y where the DAG represents the relationship between each of the entries of Y.
-
-
 
 However, what exactly is a Directed Acyclic Graph? 
 
 ## Directed Acyclic Graphs
 
-A Directed Acyclic Graph is a conceptual representation of causal relationship between data points. For example consider a dataset Y = (Y1, Y2, Y3), where Y1 represents number of cigarettes smoked, Y2 represents the number of hours worked in a factory, and Y3 represents number of cancer cells in the lungs. 
+A Directed Acyclic Graph is a conceptual representation of causal relationship between data points. For example, consider a dataset Y = (Y1, Y2, Y3), where Y1 represents number of cigarettes smoked, Y2 represents the number of hours worked in a factory, and Y3 represents number of cancer cells in the lungs. 
 
 ```{r}
 Adjacency_matrix = matrix(nrow=3,ncol=3,0)
-Adjacency_matrix[,1]=c(0,1,1)
+Adjacency_matrix[,1]=c(0,0,1)
 Adjacency_matrix[,2]=c(0,0,1)
 Adjacency_matrix[,3]=c(0,0,0)
 
-
+Adjacency_matrix
 AdjDAG(Adjacency_matrix)
 ```
+
+The DAG above shows edge from Y1 to Y3 and edge from Y2 to Y3. This represents in terms of causal discovery a causal relationship where number of cigarettes smoke affects the number of lung cancer cells and number of hours worked in the factory affecting the number of lung cancer cells. 
+
+The DAG is called a directed acyclic graph specifically because we specifically make it such that there are no cycles in the graph, which means if there is a represented causal relationship from Y1 to Y3, then there is not going to be a causal relationship from Y3 to Y1 creating a cycle.
+
+In order to see the structure of the DAG, we need to indicate the relationship between all of Y1, Y2, to Y3, which is done in the Adjacency matrix.
+
+# Adjacency Matrix
+
+The Adjacency matrix is a matrix where each entry of the matrix represents the causal relationship from the column number entry of Y to row number entry of Y. So let's observe the Directed Acyclic Graph structure shown below.
+
+$$
+\begin{bmatrix} 
+	0 & 0 & 0 \\
+	0 & 0 & 0\\
+	1 & 1 & 0 \\
+	\end{bmatrix}
+$$
+
+We see that there is a relationship from Y1 to Y3 and Y2 to Y3, which will create the DAG below:
+```{r}
+Adjacency_matrix = matrix(nrow=3,ncol=3,0)
+Adjacency_matrix[,1]=c(0,0,1)
+Adjacency_matrix[,2]=c(0,0,1)
+Adjacency_matrix[,3]=c(0,0,0)
+
+#Adjacency_matrix
+AdjDAG(Adjacency_matrix)
+```
+Therefore, in order to prevent the cyclic cases to be represented within the adjacency matrix, we make sure that it is lower triangular. Where if the matrix was represented like 
+
+$$
+\begin{bmatrix} 
+	0 & 0 & 1 \\
+	0 & 0 & 0\\
+	1 & 1 & 0 \\
+	\end{bmatrix}
+$$
+
+There is a cyclic relationship where Y1 causes Y3 and Y3 causes Y1, which we do not want to occur in a DAG.
+
+# Determining coeffecients 
+
+The specific model of a DAG is 
+$$Y_{i} = \sum_{j\in pa(j)}B_{ij}Y_{j}+\epsilon_{i}$$
+
+Each of the entries of $B_{ij}$ for the entries of Y represents the coefficients corresponding to the edge from $Y_{j}$ to $Y_{i}$. Where for the example Y = (Y1, Y2, Y3), the coefficient matrix will look like below, where each bij represents the coefficient of edge between bj to bi.
+
+$$
+\begin{bmatrix} 
+	b11 & b12 & b13 \\
+	b21 & b22 & b23\\
+	b31 & b32 & b33 \\
+	\end{bmatrix}
+$$
+
+To determine this $B_{ij}$ matrix, we consider two different approaches
+
+* Assign the Spike and Slab Prior on the $B_{ij}$
+* Use SSVS Bayesian model selection 
+
+## Spike and Slab prior approach
+
+The spike and slab regression is based on the spike and slab prior on the 
+
+$B_{ij}$ ~ $(1-Aij) \delta_{0} + Aij*N(0,\gamma)$, where
+$\gamma$ ~ IG(a,b) 
+
+and Aij is the entries of the adjacency matrix. This prior helps determine which coefficients above should be included or not. Therefore, based on our adjacency matrix, the aij that are 0 will be pushed to 0 and not considered and estimate the coefficients where aij = 1, which is where there is an edge present between $Y_{j}$ to $Y_{i}$ 
+
+A rescaled form of the spike and slab regression is done on the spikeslab function that is specifically uses gibbs sampling to form the destribution shape of the $B_{ij}$'s, which is going to be used for variable selection to get the value of the coefficients. The full approach was done in the CoefMat_Create_Spike_Slab function
+
+An example is shown below:
+```{r}
+Y = rnorm(3)
+
+Adjacency_matrix = matrix(nrow=3,ncol=3,0)
+Adjacency_matrix[,1]=c(0,0,1)
+Adjacency_matrix[,2]=c(0,0,1)
+Adjacency_matrix[,3]=c(0,0,0)
+
+CoefMat_Create_Spike_Slab(Y, Adjacency_matrix)
+```
+
+## SSVS model selection approach
+
+SSVS is a Bayesian variable selection method used to estimate the probability that individual predictors should be included in a regression model. Using MCMC estimation, the method samples thousands of regression models in order to characterize the model to get the coefficients. The method is being performed using the SSVS package in tandem with further analysis within the CoefMat_Create_Spike_Slab function to get the results.
+
+```{r}
+SSVS_results = CoefMat_Create_SSVS(Y, Adjacency_matrix)
+SSVS_results
+```
+
+
+Therefore, using the two approaches, you can plug in an adjacency matrix with the structure of the DAG that you want and your data Y, to get the coefficients that correspond to each of the edges of the DAG.
+
+Then using the AdjDAG function, you can plug in your adjacency matrix, to create a full DAG representation from scratch.
+
+
+
+
+
+
+
