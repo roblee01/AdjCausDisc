@@ -17,9 +17,16 @@ AdjDAG <- function(A){
   names <- paste('Y',1:nrow(A),sep="")
 
   # Creating all the DAG strings that will contain all the information and different edges present in the DAG
-  DAG_Strings <- c(as.formula(paste(names[2],paste(names[A[2,]==1],collapse="+"),sep="~")))
+  DAG_Strings=c()
+  if(paste(names[A[2,]==1],collapse="+") == ""){
+  } else{
+    DAG_Strings <- c(as.formula(paste(names[2],paste(names[A[2,]==1],collapse="+"),sep="~")))
+  }
   for(i in 3:nrow(A)){
-    DAG_Strings = append(DAG_Strings,c(as.formula(paste(names[i],paste(names[A[i,]==1],collapse="+"),sep="~"))))
+    if(paste(names[A[i,]==1],collapse="+")==""){
+    } else{
+      DAG_Strings <- append(DAG_Strings,c(as.formula(paste(names[i],paste(names[A[i,]==1],collapse="+"),sep="~"))))
+    }
   }
 
   # Prints out the plot
