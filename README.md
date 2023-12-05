@@ -38,26 +38,26 @@ the DAG cyclic. Therefore, we make sure that the Adjacency matrix is
 lower triangular.
 
 As mentioned, though the goal of some of the packages is to find the
-corresponding the coefficients corresponding to the edges that are
+corresponding the coeffecients corresponding to the edges that are
 connected in the DAG, which can be solved in the matrix
 *B*<sub>*ij*</sub> in the model
 
 *Y*<sub>*i*</sub> = ∑<sub>*j* ∈ *pa*(*j*)</sub>*B*<sub>*ij*</sub>*Y*<sub>*j*</sub> + *ϵ*<sub>*i*</sub>
 
 where pa(j) represents the parent nodes of *Y*<sub>*j*</sub>. In order
-to get the corresponding matrix with all the *B*<sub>*i**j*</sub>’s is
+to get the corresponding matrix with all the *B*<sub>*ij*</sub>’s is
 to use either the
 
-\*CoefMat_Create_Spike_Slab: Assigns the spike and slab prior to
-*B*<sub>*ij*</sub> and performs sampling to get the values of the
-individuals coefficients.
+-   CoefMat_Create_Spike_Slab: Assigns the spike and slab prior to
+    *B*<sub>*ij*</sub> and performs sampling to get the values of the
+    individuals coefficients.
 
-\*CoefMat_Create_SSVS: Using stochastic search variable selection to get
-the *B*<sub>*ij*</sub>s and performs sampling to get the values of the
-individuals coefficients.
+-   CoefMat_Create_SSVS: Using stochastic search variable selection to
+    get the *B*<sub>*ij*</sub>s and performs sampling to get the
+    values of the individuals coefficients.
 
-\*AdjDAG: Uses the structure provided in the adjacency matrix, to create
-the visualization of the Directed Acyclic Graph.
+-   AdjDAG: Uses the structure provided in the adjacency matrix, to
+    create the visualization of the Directed Acyclic Graph.
 
 ``` r
 library(AdjCausDisc)
@@ -83,23 +83,29 @@ Spike_Slab_results = CoefMat_Create_Spike_Slab(Y,Adjacency_matrix)
 SSVS_results = CoefMat_Create_SSVS(Y, Adjacency_matrix)
 ```
 
+## Spike Slab results
+
 ``` r
 Spike_Slab_results
 ```
 
-    ##             [,1]        [,2] [,3]
-    ## [1,]  0.00000000  0.00000000    0
-    ## [2,]  0.06291464  0.00000000    0
-    ## [3,] -0.09707375 -0.07412243    0
+    ##            [,1]       [,2] [,3]
+    ## [1,] 0.00000000 0.00000000    0
+    ## [2,] 0.11038648 0.00000000    0
+    ## [3,] 0.01719221 0.01621478    0
+
+## SSVS results
 
 ``` r
 SSVS_results
 ```
 
-    ##         [,1]    [,2] [,3]
-    ## [1,]  0.0000  0.0000    0
-    ## [2,]  0.2655  0.0000    0
-    ## [3,] -0.1916 -0.1942    0
+    ##        [,1]   [,2] [,3]
+    ## [1,] 0.0000 0.0000    0
+    ## [2,] 0.1254 0.0000    0
+    ## [3,] 0.0140 0.0086    0
+
+## Adjacency matrix visualization
 
 ``` r
 AdjDAG(Adjacency_matrix)

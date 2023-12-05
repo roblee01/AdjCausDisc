@@ -1,7 +1,7 @@
 ---
 title: "AdjCausDisc"
 author: Robert Lee
-date: 11 30, 2023
+date: 11, 30, 2023
 output:
   md_document:
     variant: markdown_github
@@ -36,11 +36,11 @@ $$Y_{i} = \sum_{j\in pa(j)}B_{ij}Y_{j}+\epsilon_{i}$$
 where pa(j) represents the parent nodes of $Y_{j}$.
 In order to get the corresponding matrix with all the $B_{ij}$'s is to use either the 
 
-*CoefMat_Create_Spike_Slab: Assigns the spike and slab prior to $B_{ij}$ and performs sampling to get the values of the individuals coefficients.
+* CoefMat_Create_Spike_Slab: Assigns the spike and slab prior to $B_{ij}$ and performs sampling to get the values of the individuals coefficients.
 
-*CoefMat_Create_SSVS: Using stochastic search variable selection to get the $B_{ij}$s and performs sampling to get the values of the individuals coefficients. 
+* CoefMat_Create_SSVS: Using stochastic search variable selection to get the $B_{ij}$s and performs sampling to get the values of the individuals coefficients. 
 
-*AdjDAG: Uses the structure provided in the adjacency matrix, to create the visualization of the Directed Acyclic Graph.
+* AdjDAG: Uses the structure provided in the adjacency matrix, to create the visualization of the Directed Acyclic Graph.
 
 
 ```{r,fig.keep='none'}
@@ -61,15 +61,17 @@ Spike_Slab_results = CoefMat_Create_Spike_Slab(Y,Adjacency_matrix)
 SSVS_results = CoefMat_Create_SSVS(Y, Adjacency_matrix)
 ```
 
+## Spike Slab results
 ```{r}
 Spike_Slab_results
 ```
 
+## SSVS results
 ```{r}
 SSVS_results
 ```
 
-
+## Adjacency matrix visualization
 ```{r}
 AdjDAG(Adjacency_matrix)
 ```
